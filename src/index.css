@@ -1,0 +1,397 @@
+@import "@fontsource-variable/inter";
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-heading: var(--font-sans);
+    /* Literal stack: generated --font-* vars wrap the whole stack in one
+       string, which computes to a single nonexistent family. */
+    --font-sans: "Inter Variable", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    /* Explicit values mirror DESIGN.md instead of deriving from one base radius. */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.25rem;
+    --radius-3xl: 1.5rem;
+    --radius-4xl: 2rem;
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-dark-foreground: var(--dark-foreground);
+    --color-dark: var(--dark);
+    --color-light-foreground: var(--light-foreground);
+    --color-light: var(--light);
+    --color-danger-foreground: var(--danger-foreground);
+    --color-danger: var(--danger);
+    --color-warning-foreground: var(--warning-foreground);
+    --color-warning: var(--warning);
+    --color-info-foreground: var(--info-foreground);
+    --color-info: var(--info);
+    --color-success-foreground: var(--success-foreground);
+    --color-success: var(--success);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius: 0.5rem;
+}
+
+:root {
+    /* Brand parameters — literals mirroring DESIGN.md. The generated
+       design-theme.css is a checked-in contract (see design:check), not a
+       runtime import: its --spacing-* keys hijack max-w-* utilities and its
+       values form cyclic vars with the aliases below. */
+    --paper: #f7f8fa;
+    --ink: #111418;
+    --brand: #334155;
+    --brand-hover: #2b3748;
+    --brand-ink: #ffffff;
+    --canvas: #ffffff;
+
+    --background: var(--paper);
+    --foreground: var(--ink);
+    --card: var(--canvas);
+    --card-foreground: var(--ink);
+    --popover: var(--canvas);
+    --popover-foreground: var(--ink);
+    --primary: var(--brand);
+    --primary-foreground: var(--brand-ink);
+    --secondary: #e7eaee;
+    --secondary-foreground: var(--ink);
+    --muted: #eff1f4;
+    --muted-foreground: #61666e;
+    --accent: var(--secondary);
+    --accent-foreground: var(--secondary-foreground);
+    --destructive: var(--danger);
+    --success: #16803c;
+    --success-foreground: var(--brand-ink);
+    --info: #0369a1;
+    --info-foreground: var(--brand-ink);
+    --warning: #c2410c;
+    --warning-foreground: var(--brand-ink);
+    --danger: #c81e1e;
+    --danger-foreground: var(--brand-ink);
+    --light: #edf0f3;
+    --light-foreground: #111418;
+    --dark: #333b45;
+    --dark-foreground: #ffffff;
+    --border: #dde1e7;
+    --input: var(--border);
+    --ring: var(--brand);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --radius: 0.5rem;
+    --sidebar: #e9ebef;
+    --sidebar-foreground: var(--ink);
+    --sidebar-primary: var(--brand);
+    --sidebar-primary-foreground: var(--brand-ink);
+    --sidebar-accent: var(--secondary);
+    --sidebar-accent-foreground: var(--secondary-foreground);
+    --sidebar-border: var(--border);
+    --sidebar-ring: var(--brand);
+}
+
+.dark {
+    /* Brand parameters — the whole dark theme derives from these five. */
+    --paper: #121417;
+    --ink: #e8eaed;
+    --brand: #b6bdc7;
+    --brand-hover: #c5cbd3;
+    --brand-ink: #16191d;
+    --canvas: #20252c;
+
+    --background: var(--paper);
+    --foreground: var(--ink);
+    --card: var(--canvas);
+    --card-foreground: var(--ink);
+    --popover: var(--canvas);
+    --popover-foreground: var(--ink);
+    --primary: var(--brand);
+    --primary-foreground: var(--brand-ink);
+    --secondary: #2d333c;
+    --secondary-foreground: var(--ink);
+    --muted: #2a3039;
+    --muted-foreground: #9aa1ab;
+    --accent: var(--secondary);
+    --accent-foreground: var(--secondary-foreground);
+    --destructive: var(--danger);
+    --success: #4ade80;
+    --success-foreground: #0c2415;
+    --info: #38bdf8;
+    --info-foreground: #0b1f30;
+    --warning: #facc15;
+    --warning-foreground: #451a03;
+    --danger: #fb7185;
+    --danger-foreground: #450a0a;
+    --border: #2e333a;
+    --input: var(--border);
+    --ring: var(--brand);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --sidebar: #171a1f;
+    --sidebar-foreground: var(--ink);
+    --sidebar-primary: var(--brand);
+    --sidebar-primary-foreground: var(--brand-ink);
+    --sidebar-accent: var(--secondary);
+    --sidebar-accent-foreground: var(--secondary-foreground);
+    --sidebar-border: var(--border);
+    --sidebar-ring: var(--brand);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    font-size: 1rem;
+    line-height: 1.6;
+    }
+  html {
+    @apply font-sans;
+    }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+/* Keep typography utilities outside text-* so cn does not merge them with text colors. */
+@layer utilities {
+  .type-body {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  .type-card-title {
+    font-size: 1.125rem;
+    line-height: 1.35;
+  }
+  .type-caption {
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes alvor-enter {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes alvor-pop {
+    from {
+      opacity: 0;
+      transform: scale(0.98) translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .animate-enter {
+    animation: alvor-enter 0.35s ease-out both;
+  }
+  .animate-pop {
+    animation: alvor-pop 0.18s ease-out both;
+  }
+  @keyframes alvor-sheet {
+    from {
+      opacity: 0.5;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .animate-sheet {
+    animation: alvor-sheet 0.22s ease-out both;
+  }
+}
+
+/* Sonner toasts: layered elevation plus a type accent bar in template roles. */
+.toaster {
+  --toast-shadow:
+    0 16px 40px -16px rgb(0 0 0 / 0.35),
+    0 4px 12px -4px rgb(0 0 0 / 0.18);
+}
+
+.dark .toaster {
+  --toast-shadow:
+    0 20px 48px -12px rgb(0 0 0 / 0.7),
+    0 4px 12px -4px rgb(0 0 0 / 0.5);
+}
+
+.toaster li[data-sonner-toast] {
+  box-shadow: var(--toast-shadow);
+  border-color: color-mix(in oklch, var(--border), var(--foreground) 14%);
+}
+
+.toaster li[data-sonner-toast][data-type="success"] {
+  box-shadow:
+    inset 3px 0 0 var(--success),
+    var(--toast-shadow);
+}
+
+.toaster li[data-sonner-toast][data-type="info"] {
+  box-shadow:
+    inset 3px 0 0 var(--info),
+    var(--toast-shadow);
+}
+
+.toaster li[data-sonner-toast][data-type="warning"] {
+  box-shadow:
+    inset 3px 0 0 var(--warning),
+    var(--toast-shadow);
+}
+
+.toaster li[data-sonner-toast][data-type="error"] {
+  box-shadow:
+    inset 3px 0 0 var(--danger),
+    var(--toast-shadow);
+}
+
+.toaster li[data-sonner-toast][data-type="success"] [data-icon] {
+  color: var(--success);
+}
+
+.toaster li[data-sonner-toast][data-type="info"] [data-icon] {
+  color: var(--info);
+}
+
+.toaster li[data-sonner-toast][data-type="warning"] [data-icon] {
+  color: var(--warning);
+}
+
+.toaster li[data-sonner-toast][data-type="error"] [data-icon] {
+  color: var(--danger);
+}
+
+/* Status colors on primary buttons need their paired foreground for contrast. */
+[data-slot="button"][data-variant="default"][data-status="success"] {
+  color: var(--success-foreground);
+  background: var(--success);
+}
+
+[data-slot="button"][data-variant="default"][data-status="info"] {
+  color: var(--info-foreground);
+  background: var(--info);
+}
+
+[data-slot="button"][data-variant="default"][data-status="error"] {
+  color: var(--danger-foreground);
+  background: var(--danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse,
+  .animate-spin {
+    animation: none !important;
+  }
+}
+
+/* Dark scheme: toasts take a deep tint of their role color. */
+.dark .toaster li[data-sonner-toast][data-type="success"] {
+  --normal-bg: color-mix(in oklch, var(--success) 18%, var(--popover));
+}
+
+.dark .toaster li[data-sonner-toast][data-type="info"] {
+  --normal-bg: color-mix(in oklch, var(--info) 18%, var(--popover));
+}
+
+.dark .toaster li[data-sonner-toast][data-type="warning"] {
+  --normal-bg: color-mix(in oklch, var(--warning) 22%, var(--popover));
+}
+
+.dark .toaster li[data-sonner-toast][data-type="error"] {
+  --normal-bg: color-mix(in oklch, var(--danger) 18%, var(--popover));
+}
+
+/* Light scheme: toasts take a light tint of their role color. */
+.toaster li[data-sonner-toast][data-type="success"] {
+  --normal-bg: color-mix(in oklch, var(--success) 12%, var(--popover));
+}
+
+.toaster li[data-sonner-toast][data-type="info"] {
+  --normal-bg: color-mix(in oklch, var(--info) 12%, var(--popover));
+}
+
+.toaster li[data-sonner-toast][data-type="warning"] {
+  --normal-bg: color-mix(in oklch, var(--warning) 16%, var(--popover));
+}
+
+.toaster li[data-sonner-toast][data-type="error"] {
+  --normal-bg: color-mix(in oklch, var(--danger) 12%, var(--popover));
+}
+
+/* Button status flash: transient tone + glow matching the toast role. */
+[data-slot="button"][data-status="success"] {
+  color: var(--success);
+  border-color: color-mix(in oklch, var(--success) 55%, transparent);
+  box-shadow:
+    0 0 0 3px color-mix(in oklch, var(--success) 22%, transparent),
+    0 8px 24px -12px color-mix(in oklch, var(--success) 65%, transparent);
+}
+
+[data-slot="button"][data-status="info"] {
+  color: var(--info);
+  border-color: color-mix(in oklch, var(--info) 55%, transparent);
+  box-shadow:
+    0 0 0 3px color-mix(in oklch, var(--info) 22%, transparent),
+    0 8px 24px -12px color-mix(in oklch, var(--info) 65%, transparent);
+}
+
+[data-slot="button"][data-status="error"] {
+  color: var(--danger);
+  border-color: color-mix(in oklch, var(--danger) 55%, transparent);
+  box-shadow:
+    0 0 0 3px color-mix(in oklch, var(--danger) 22%, transparent),
+    0 8px 24px -12px color-mix(in oklch, var(--danger) 65%, transparent);
+}
+
+/* Below tablet: toasts span the display width. */
+@media (max-width: 1023.98px) {
+  [data-sonner-toaster] {
+    --width: calc(100vw - 32px);
+  }
+}
+
