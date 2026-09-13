@@ -2,6 +2,8 @@ import { ArrowRight, Blocks, Check, Code2, ExternalLink, LayoutGrid, Palette, Za
 import { Link } from "react-router"
 
 import { BrandMark } from "@/components/layout/brand-mark"
+import { ThemeToggle } from "@/components/layout/theme-toggle"
+import type { ThemeState } from "@/hooks/use-theme"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
@@ -19,7 +21,11 @@ const STACK_ITEMS = [
   { label: "Lucide + PWA", detail: "Icons, offline shell and tokens", icon: Zap },
 ] as const
 
-function LandingHeader() {
+interface LandingHeaderProps {
+  themeState: ThemeState
+}
+
+function LandingHeader({ themeState }: LandingHeaderProps) {
   return (
     <header className="border-b border-border/70 bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-6 px-4 sm:px-6">
@@ -48,16 +54,23 @@ function LandingHeader() {
             Showcase
           </Link>
         </nav>
-        <Button size="sm" render={<a href="/login" target="_blank" rel="noopener noreferrer" />}>
-          Preview sign-in
-          <ExternalLink data-icon="inline-end" />
-        </Button>
+        <div className="flex items-center gap-1">
+          <ThemeToggle {...themeState} />
+          <Button size="sm" render={<a href="/login" target="_blank" rel="noopener noreferrer" />}>
+            Preview sign-in
+            <ExternalLink data-icon="inline-end" />
+          </Button>
+        </div>
       </div>
     </header>
   )
 }
 
-function Landing() {
+interface LandingProps {
+  themeState: ThemeState
+}
+
+function Landing({ themeState }: LandingProps) {
   return (
     <div className="min-h-svh bg-background text-foreground">
       <a
@@ -66,7 +79,7 @@ function Landing() {
       >
         Skip to content
       </a>
-      <LandingHeader />
+      <LandingHeader themeState={themeState} />
       <main id="main-content">
         <section className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[minmax(0,0.9fr)_minmax(420px,1.1fr)] lg:items-center lg:gap-16">
           <div>

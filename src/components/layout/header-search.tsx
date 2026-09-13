@@ -165,9 +165,13 @@ function HeaderSearch({ activeId, onNavigate }: HeaderSearchProps) {
           aria-expanded={open}
           aria-controls="header-search-results"
           aria-autocomplete="list"
+          aria-keyshortcuts="/"
           aria-activedescendant={open && entries.length > 0 ? `search-result-${safeCursor}` : undefined}
-          className="h-10 w-full rounded-lg border border-border bg-card pr-9 pl-9 type-body shadow-xs outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/25"
+          className="h-10 w-full rounded-lg border border-border bg-card pr-12 pl-9 type-body shadow-xs outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/25"
         />
+        <kbd aria-hidden="true" className="pointer-events-none absolute top-1/2 right-2.5 -translate-y-1/2 rounded border bg-muted px-1.5 py-0.5 font-sans text-[11px] text-muted-foreground">
+          /
+        </kbd>
       </div>
 
       {open && panelRect && createPortal(

@@ -3,13 +3,19 @@ import { ArrowLeft, Eye, EyeOff } from "lucide-react"
 import { Link } from "react-router"
 
 import { BrandMark } from "@/components/layout/brand-mark"
+import { ThemeToggle } from "@/components/layout/theme-toggle"
+import type { ThemeState } from "@/hooks/use-theme"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-function Login() {
+interface LoginProps {
+  themeState: ThemeState
+}
+
+function Login({ themeState }: LoginProps) {
   const [showPassword, setShowPassword] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
@@ -20,6 +26,9 @@ function Login() {
           <BrandMark className="size-8 rounded-[8px]" />
           <span className="font-heading text-base font-semibold tracking-tight">Alvor</span>
         </Link>
+        <div className="ml-auto">
+          <ThemeToggle {...themeState} />
+        </div>
       </header>
       <main id="main-content" className="flex min-h-[calc(100svh-4rem)] items-center justify-center px-4 py-12 sm:px-6">
         <div className="w-full max-w-md">

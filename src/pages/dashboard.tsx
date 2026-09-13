@@ -91,9 +91,10 @@ function Dashboard() {
   }
 
   function toggleSort(nextKey: SortKey) {
+    const nextSort = nextKey === sortKey && sortDirection === -1 ? null : nextKey
     const nextDirection = nextKey === sortKey && sortDirection === 1 ? "desc" : null
     updateParams({
-      sort: nextKey === "name" ? null : nextKey,
+      sort: nextSort,
       dir: nextDirection,
       page: null,
     })
@@ -228,7 +229,7 @@ function Dashboard() {
           </div>
         </div>
         <Card className="overflow-hidden">
-          <Table>
+          <Table className="min-w-[42rem]">
             <TableHeader>
               <TableRow>
                 <TableHead aria-sort={sortKey === "name" ? (sortDirection === 1 ? "ascending" : "descending") : "none"}>
@@ -256,7 +257,16 @@ function Dashboard() {
               ))}
               {visibleItems.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={4} className="py-10 text-center text-muted-foreground">No work matches “{query}”.</TableCell>
+                  <TableCell colSpan={4} className="py-10 text-center text-muted-foreground">
+                    <div className="flex flex-col items-center gap-3">
+                      <span>No work matches “{query}”.</span>
+                      {query && (
+                        <Button size="sm" variant="outline" onClick={() => updateParams({ q: null, page: null })}>
+                          Clear search
+                        </Button>
+                      )}
+                    </div>
+                  </TableCell>
                 </TableRow>
               )}
             </TableBody>

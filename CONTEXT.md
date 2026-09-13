@@ -22,7 +22,7 @@
 - `src/hooks/`: shared hooks (`use-theme` with light/dark/system support, `use-toast-position`, `use-status-flash` transient trigger feedback)
 - `src/lib/`: shared helpers (`utils.ts` class-name merge)
 - `src/main.tsx`: React strict-mode bootstrap, `BrowserRouter`, PWA toasts
-- `src/pages/`: standalone `landing.tsx` and `login.tsx`, shell-based `dashboard.tsx` preview, `/showcase` component gallery composed from `showcase/` domain demos, plus `placeholder.tsx` stubs for retained legacy routes; cards/forms/data-table include explicit spacing buffers
+- `src/pages/`: standalone `landing.tsx` and `login.tsx`, shell-based `dashboard.tsx` preview, `/showcase` component gallery composed from `showcase/` domain demos, and `not-found.tsx` for unknown routes; cards/forms/data-table include explicit spacing buffers
 - `vite.config.ts`: Vite setup with React, Tailwind, and `@` alias
 
 ## Excluded Paths

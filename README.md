@@ -79,6 +79,7 @@ Then open the routes below in an evergreen browser.
 | `/dashboard` | `SiteShell` | Primary public dashboard; local starter data, URL-backed table controls |
 | `/showcase` | `SiteShell` | Complete developer reference for shipped UI primitives |
 | `/me` | Redirect | Compatibility redirect to `/dashboard` |
+| `*` | `SiteShell` | Friendly 404 with links back to known destinations |
 
 Sign in stays a separate action so the public access flow does not become a destination inside the application shell.
 
@@ -87,7 +88,6 @@ Sign in stays a separate action so the public access flow does not become a dest
 1. Add the item with its `path` in `nav-items.ts` when it belongs in application navigation.
 2. Add a lazy route in `App.tsx` and a title in `TITLES`.
 3. Add a stable entry to `src/pages/showcase/section-registry.ts` when the page exposes showcase patterns.
-4. Replace `PlaceholderPage` with the real surface when ready.
 
 ### Removing the showcase
 

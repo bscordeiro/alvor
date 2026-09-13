@@ -19,7 +19,7 @@ export default defineConfig({
       manifest: {
         name: 'Alvor',
         short_name: 'Alvor',
-        description: 'A calm starting point for your next site.',
+        description: 'A calm operational dashboard template for your next product.',
         theme_color: '#F7F8FA',
         background_color: '#F7F8FA',
         display: 'standalone',

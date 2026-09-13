@@ -7,8 +7,9 @@ import { Button } from "@/components/ui/button"
 import { Toaster } from "@/components/ui/sonner"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useTheme } from "@/hooks/use-theme"
+import type { ThemeState } from "@/hooks/use-theme"
 import { useToastPosition } from "@/hooks/use-toast-position"
-import { PlaceholderPage } from "@/pages/placeholder"
+import { NotFoundPage } from "@/pages/not-found"
 
 const Landing = lazy(() =>
   import("@/pages/landing").then((module) => ({ default: module.Landing })),
@@ -29,22 +30,11 @@ const TITLES: Record<string, string> = {
   "/dashboard": "Dashboard · Alvor",
   "/me": "Dashboard · Alvor",
   "/showcase": "Showcase · Alvor",
-  "/explore": "Explore · Alvor",
-  "/explore/discover": "Discover · Alvor",
-  "/explore/trending": "Trending · Alvor",
-  "/explore/saved": "Saved · Alvor",
-  "/activity": "Activity · Alvor",
-  "/activity/updates": "Updates · Alvor",
-  "/activity/mentions": "Mentions · Alvor",
-  "/settings": "Settings · Alvor",
-  "/settings/general": "General · Alvor",
-  "/settings/appearance": "Appearance · Alvor",
-  "/settings/account": "Account · Alvor",
 }
 
 function RouteFallback() {
   return (
-    <div className="mx-auto flex min-h-[60svh] w-full max-w-5xl flex-col justify-center gap-3 py-8" aria-label="Loading page">
+    <div role="status" aria-label="Loading page" className="mx-auto flex min-h-[60svh] w-full max-w-5xl flex-col justify-center gap-3 py-8">
       <Skeleton className="h-8 w-1/3" />
       <Skeleton className="h-4 w-2/3" />
       <Skeleton className="h-48 w-full" />
@@ -98,68 +88,19 @@ class RouteErrorBoundary extends Component<RouteErrorBoundaryProps, RouteErrorBo
   }
 }
 
-function AppRoutes() {
+interface AppRoutesProps {
+  themeState: ThemeState
+}
+
+function AppRoutes({ themeState }: AppRoutesProps) {
   return (
     <Routes>
-      <Route path="/" element={<Landing />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Landing themeState={themeState} />} />
+      <Route path="/login" element={<Login themeState={themeState} />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/me" element={<Navigate to="/dashboard" replace />} />
       <Route path="/showcase" element={<Showcase />} />
-      <Route
-        path="/explore"
-        element={
-          <PlaceholderPage
-            title="Explore"
-            description="Browse curated surfaces. Pick a child view to continue."
-            parentLabel="Section"
-          />
-        }
-      />
-      <Route
-        path="/explore/discover"
-        element={<PlaceholderPage title="Discover" description="New and noteworthy content surfaces here." parentLabel="Explore" parentPath="/explore" />}
-      />
-      <Route
-        path="/explore/trending"
-        element={<PlaceholderPage title="Trending" description="What other operators are looking at right now." parentLabel="Explore" parentPath="/explore" />}
-      />
-      <Route
-        path="/explore/saved"
-        element={<PlaceholderPage title="Saved" description="Everything pinned for later review." parentLabel="Explore" parentPath="/explore" />}
-      />
-      <Route
-        path="/activity"
-        element={<PlaceholderPage title="Activity" description="Updates and mentions across the workspace." parentLabel="Section" />}
-      />
-      <Route
-        path="/activity/updates"
-        element={<PlaceholderPage title="Updates" description="Release notes, scheduling events, and system changes." parentLabel="Activity" parentPath="/activity" />}
-      />
-      <Route
-        path="/activity/mentions"
-        element={<PlaceholderPage title="Mentions" description="Direct references to the current operator." parentLabel="Activity" parentPath="/activity" />}
-      />
-      <Route
-        path="/settings"
-        element={<PlaceholderPage title="Settings" description="Workspace preferences. Pick a subsection." parentLabel="Section" />}
-      />
-      <Route
-        path="/settings/general"
-        element={<PlaceholderPage title="General" description="Names, defaults, and workspace-level options." parentLabel="Settings" parentPath="/settings" />}
-      />
-      <Route
-        path="/settings/appearance"
-        element={<PlaceholderPage title="Appearance" description="Theme, density, and display preferences." parentLabel="Settings" parentPath="/settings" />}
-      />
-      <Route
-        path="/settings/account"
-        element={<PlaceholderPage title="Account" description="Identity, access, and session controls." parentLabel="Settings" parentPath="/settings" />}
-      />
-      <Route
-        path="*"
-        element={<PlaceholderPage title="Not found" description="This view does not exist. Back to the showcase." parentLabel="Alvor" parentPath="/" />}
-      />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   )
 }
@@ -177,7 +118,7 @@ function App() {
   const routes = (
     <RouteErrorBoundary key={pathname}>
       <Suspense fallback={<RouteFallback />}>
-        <AppRoutes />
+        <AppRoutes themeState={themeState} />
       </Suspense>
     </RouteErrorBoundary>
   )

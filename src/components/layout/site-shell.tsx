@@ -1,10 +1,11 @@
 import { useEffect, useRef } from "react"
 import type { ReactNode } from "react"
-import { ExternalLink, Moon, Sun } from "lucide-react"
+import { ExternalLink } from "lucide-react"
 import { Link, useLocation, useNavigate, useNavigationType } from "react-router"
 
 import { BrandMark } from "@/components/layout/brand-mark"
 import { HeaderSearch } from "@/components/layout/header-search"
+import { ThemeToggle } from "@/components/layout/theme-toggle"
 import { UserProfile } from "@/components/layout/user-profile"
 import { NAV_ITEMS, getNavIdByPath } from "@/components/layout/nav-items"
 import type { ThemeState } from "@/hooks/use-theme"
@@ -102,9 +103,6 @@ function SiteShell({ children, contentLayout = "fluid", theme, resolvedTheme, cy
     navigate(path)
   }
 
-  const themeLabel = theme === "system" ? "system preference" : `${theme} mode`
-  const nextThemeLabel = resolvedTheme === "dark" ? "light mode" : "dark mode"
-
   return (
     <div className="relative h-svh overflow-hidden bg-background text-foreground">
       <a
@@ -123,15 +121,7 @@ function SiteShell({ children, contentLayout = "fluid", theme, resolvedTheme, cy
             <HeaderSearch activeId={activeId} onNavigate={selectAndReveal} />
           </div>
           <div className="flex shrink-0 items-center gap-1">
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              aria-label={`Theme is ${themeLabel}. Switch to ${nextThemeLabel}.`}
-              title={`Theme: ${themeLabel}`}
-              onClick={cycleTheme}
-            >
-              {resolvedTheme === "dark" ? <Sun /> : <Moon />}
-            </Button>
+            <ThemeToggle theme={theme} resolvedTheme={resolvedTheme} cycleTheme={cycleTheme} />
             <Button
               variant="outline"
               size="sm"
